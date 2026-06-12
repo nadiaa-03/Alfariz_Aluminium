@@ -3,21 +3,40 @@ document.addEventListener("DOMContentLoaded", () => {
   const heroSection = document.querySelector(".hero");
   const logo = document.querySelector(".logo-icon");
 
+  const navLinks = document.querySelectorAll(".nav a");
+  const originalActiveLink = document.querySelector(".nav a.active");
+
   const handleScroll = () => {
     const heroBottom = heroSection ? heroSection.offsetHeight - 30 : 80;
     if (window.scrollY > heroBottom) {
       header.classList.add("scrolled");
-      logo.style.filter = "none";
+      if (logo) logo.style.filter = "none";
     } else {
       header.classList.remove("scrolled");
-      logo.style.filter = "brightness(0) invert(1)";
+      if (logo) logo.style.filter = "brightness(0) invert(1)";
+    }
+
+    const footer = document.getElementById("kontak");
+    const contactLink = document.querySelector('.nav a[href="#kontak"]');
+
+    if (footer && contactLink) {
+      const footerRect = footer.getBoundingClientRect();
+      if (footerRect.top < window.innerHeight - 50) {
+        navLinks.forEach((link) => link.classList.remove("active"));
+        contactLink.classList.add("active");
+      } else {
+        navLinks.forEach((link) => link.classList.remove("active"));
+        if (originalActiveLink) {
+          originalActiveLink.classList.add("active");
+        }
+      }
     }
   };
 
   window.addEventListener("scroll", handleScroll);
   handleScroll();
 
-  const navToggle = document.getElementById("nav-toggle");  
+  const navToggle = document.getElementById("nav-toggle");
   const navMenu = document.getElementById("nav-menu");
 
   if (navToggle && navMenu) {
