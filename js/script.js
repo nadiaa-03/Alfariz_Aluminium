@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("scroll", handleScroll);
   handleScroll();
 
-  const navToggle = document.getElementById("nav-toggle");
+  const navToggle = document.getElementById("nav-toggle");  
   const navMenu = document.getElementById("nav-menu");
 
   if (navToggle && navMenu) {
